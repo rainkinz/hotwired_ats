@@ -4,6 +4,8 @@ class CreateQuestions < ActiveRecord::Migration[7.1]
       t.references :quiz, null: false, foreign_key: true, type: :uuid
       t.text :content
 
+      t.text :answer
+
       t.timestamps
     end
   end
