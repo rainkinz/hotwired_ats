@@ -1,4 +1,4 @@
-<%= form_with(model: quiz) do |form| %>
+<%= simple_form_for(quiz) do |form| %>
   <% if quiz.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
@@ -11,12 +11,11 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="form-inputs">
+    <%= form.input :title %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-actions">
+    <%= form.button :submit %>
   </div>
 <% end %>
