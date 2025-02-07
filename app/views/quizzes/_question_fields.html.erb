@@ -1,0 +1,22 @@
+<div class="nested-form-wrapper" data-new-record="<%= f.object.new_record? %>">
+  <% if f.object.errors.any? %>
+    <div style="color: red">
+      <h2>
+        <%= pluralize(f.object.errors.count, "error") %>
+        prohibited this question from being saved:
+      </h2>
+
+      <ul>
+        <% f.object.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <%= f.text_area :content %>
+  </div>
+  <button type="button" data-action="nested-form#remove">Remove Question</button>
+  <%= f.hidden_field :_destroy %>
+</div>
