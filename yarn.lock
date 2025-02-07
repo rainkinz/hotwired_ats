@@ -626,6 +626,7 @@ __metadata:
     "@tailwindcss/vite": ^4.0.3
     cable_ready: 5.0.5
     mrujs: ^1.0.2
+    stimulus-rails-nested-form: ^4.1.0
     stimulus-vite-helpers: ^3
     stimulus_reflex: ^3.5.2
     tailwindcss: ^4.0.3
@@ -1728,6 +1729,15 @@ __metadata:
   dependencies:
     minipass: ^7.0.3
   checksum: ef4b6b0ae47b4a69896f5f1c4375f953b9435388c053c36d27998bc3d73e046969ccde61ab659e679142971a0b08e50478a1228f62edb994105b280f17900c98
+  languageName: node
+  linkType: hard
+
+"stimulus-rails-nested-form@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "stimulus-rails-nested-form@npm:4.1.0"
+  peerDependencies:
+    "@hotwired/stimulus": ^3.2.1
+  checksum: fe22ff0fcd7f59be8044bfdb13aae0e93abc081e9c98fa9908263aef98097b5040490ae3d88cb880320a9711bced41e5f9be676081013c3a0c296da45c9168f5
   languageName: node
   linkType: hard
 
