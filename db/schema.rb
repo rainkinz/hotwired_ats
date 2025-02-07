@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_07_012136) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_07_012848) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -31,6 +31,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_07_012136) do
     t.boolean "pressurized"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "quiz_id", null: false
+    t.text "content"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quiz_id"], name: "index_questions_on_quiz_id"
   end
 
   create_table "quizzes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -55,5 +64,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_07_012136) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "questions", "quizzes"
   add_foreign_key "users", "accounts"
 end
