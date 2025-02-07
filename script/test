@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# script/test: Run the app tests
+
+set -e
+
+printf "Running tests...\n"
+
+if docker ps -q --no-trunc | grep -q "^$(docker-compose ps -q web)$"; then
+  # use the existing running container for the test
+  if [ -n "$1" ]; then
+    # pass arguments to test call. This is useful for calling a single test.
+    docker-compose exec web rspec "$1"
+  else
+    docker-compose exec web rspec
+  fi
+else
+  if [ -n "$1" ]; then
+    # pass arguments to test call. This is useful for calling a single test.
+    docker-compose run --rm web rspec "$1"
+  else
+    docker-compose run --rm web rspec
+  fi
+fi

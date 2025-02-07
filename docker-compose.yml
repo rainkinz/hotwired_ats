@@ -1,0 +1,115 @@
+x-assets: &build
+  # TODO: Check this??
+  # we have to be root to share folders into the container, but if you're debugging
+  # an issue you should _not_ share the code and change this to docker to mimic production
+  user: root
+  build:
+    context: '.'
+    target: 'build'
+    args:
+      - 'RAILS_ENV=${RAILS_ENV:-development}'
+      - 'NODE_ENV=${NODE_ENV:-development}'
+      # installs development and test gems
+      - BUNDLE_WITHOUT=
+      - BUILD_ENV=development
+  depends_on:
+    - 'db'
+  env_file:
+    - '.env'
+  tty: true
+  volumes:
+    - '${DOCKER_WEB_VOLUME:-./public:/app/public}'
+    - ~/.aws:/docker/.aws/
+    - ~/.bash_history:/docker/.bash_history
+
+x-app: &app
+  # TODO: Check this??
+  # we have to be root to share folders into the container, but if you're debugging
+  # an issue you should _not_ share the code and change this to docker to mimic production
+  user: root
+  build:
+    context: '.'
+    target: 'app'
+    args:
+      - 'RAILS_ENV=${RAILS_ENV:-development}'
+      - 'NODE_ENV=${NODE_ENV:-development}'
+      # installs development and test gems
+      - BUNDLE_WITHOUT=
+      - BUILD_ENV=development
+  depends_on:
+    - 'db'
+  env_file:
+    - '.env'
+  tty: true
+  volumes:
+    - '${DOCKER_WEB_VOLUME:-./public:/app/public}'
+    - ~/.aws:/docker/.aws/
+    - ~/.bash_history:/docker/.bash_history
+
+services:
+  app:
+    <<: *app
+    ports:
+      - '${DOCKER_WEB_PORT_FORWARD:-7700}:3000'
+      - '${DOCKER_VITE_PORT_FORWARD:-5173}:5173'
+    tty: true
+    stdin_open: true
+    env_file: .env
+    environment:
+      # should allow for AWS_PROFILE=<whatever> docker-compose up
+      - AWS_PROFILE=${AWS_PROFILE:-logic_dev}
+      # set the default env to load secrets for
+      - CHAMBER_ENV=dev
+      # env vars for app
+      - RAILS_ENV=development
+      - REDIS_URL=redis://redis:6379/1
+      # Disable letter_opener trying to open a browser. See:
+      # https://github.com/ryanb/letter_opener?tab=readme-ov-file#remote-alternatives
+      - LAUNCHY_DRY_RUN=true
+      - BROWSER=/dev/null
+    volumes:
+      # pass through code, aws credentials dir, and bash_history
+      - ./:/app/:cached
+      # - bundle:/usr/local/bundle
+      # - node_modules:/app/node_modules
+      - packs:/app/public/packs
+
+  console:
+    <<: *build
+    build:
+      target: 'console'
+    # TODO: Fix this
+    # user: 'docker'
+    environment:
+      # should allow for AWS_PROFILE=<whatever> docker-compose up
+      - AWS_PROFILE=${AWS_PROFILE:-logic_dev}
+      # set the default env to load secrets for
+      - CHAMBER_ENV=dev
+      # env vars for app
+      - RAILS_ENV=development
+    volumes:
+      # pass through code, aws credentials dir, and bash_history
+      - ~/.aws:/docker/.aws
+      - ~/.bash_history:/docker/.bash_history
+      - ./:/app/:cached
+      # - bundle:/usr/local/bundle
+      # - node_modules:/app/node_modules
+
+  db:
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER:-postgres}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-postgres}"
+      # POSTGRES_DB: "${POSTGRES_DB}"
+    image: "postgres:16.0-bookworm"
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+    stop_grace_period: "3s"
+  redis:
+    image: redis:latest
+    volumes:
+      - redis-data:/data
+
+volumes:
+  node_modules:
+  packs:
+  bundle:
+  redis-data:

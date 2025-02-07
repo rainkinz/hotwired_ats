@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# script/setup: Initial app setup
+
+set -e
+
+printf "Starting setup script...\n"
+
+touch .env
+
+export COMPOSE_DOCKER_CLI_BUILD=1
+export DOCKER_BUILDKIT=1
+
+# check if the prereqs are installed
+docker version >/dev/null 2>&1 || { echo >&2 "Please install docker"; exit 1; }
+docker-compose version >/dev/null 2>&1 || { echo >&2 "Please install docker-compose"; exit 1; }
+
+# setup project
+printf "\nRemoving any existing docker services and volumes...\n\n"
+docker compose --profile="*" down -v
+
+printf "\nBuilding container(s)...\n\n"
+docker compose --profile="*" build
+
+printf "\nThe project is set up and configured - run ./script/start to start the container(s)."
+printf "\nOnce started you can see the site at localhost:3000!\n"

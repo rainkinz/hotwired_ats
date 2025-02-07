@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# script/cleanup: Remove docker images etc
+
+set -e
+
+printf "Starting clean script!\n"
+
+printf "\nRemoving any existing docker services and volumes...\n"
+docker-compose down -v
+
+

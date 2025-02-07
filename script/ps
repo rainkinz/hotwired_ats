@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# script/ps: prints the status of the containers
+
+set -e
+
+docker-compose ps

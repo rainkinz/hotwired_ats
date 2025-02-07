@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# script/setup: Rebuild containers
+
+set -e
+
+# docker-compose down -v
+docker-compose up --build

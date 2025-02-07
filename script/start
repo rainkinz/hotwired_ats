@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# script/server: Start the app inside the docker container
+
+set -e
+
+#if [ -n "$1" ]; then
+#  docker-compose up -d $1
+#else
+#  docker-compose up -d
+#fi
+
+if [ -n "$1" ]; then
+  docker-compose start $1
+else
+  docker-compose --profile "*" up -d
+fi

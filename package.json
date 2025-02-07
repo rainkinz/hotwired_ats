@@ -1,0 +1,22 @@
+{
+  "name": "app",
+  "private": true,
+  "packageManager": "yarn@3.5.1+sha256.64c0b63e5fa0e21f354b5eff7c9a1b486f32046bfc3283670569e3c6a9cad102",
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2",
+    "@hotwired/turbo-rails": "^8.0.10",
+    "@rails/actioncable": "^7.2.100",
+    "@tailwindcss/forms": "^0.5.9",
+    "cable_ready": "5.0.5",
+    "mrujs": "^1.0.2",
+    "stimulus-vite-helpers": "^3",
+    "stimulus_reflex": "^3.5.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.3",
+    "tailwindcss": "^4.0.3",
+    "vite": "^5.0.0",
+    "vite-plugin-full-reload": "^1.2.0",
+    "vite-plugin-ruby": "^5.1.0"
+  }
+}

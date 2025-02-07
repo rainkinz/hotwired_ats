@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# script/server: Start the app inside the docker container
+
+set -e
+
+
+if [ -n "$1" ]; then
+  # pass arguments to test call. This is useful for calling a single test.
+  script/stop $1
+  sleep 1
+  script/start $1
+else
+  script/stop
+  sleep 1
+  script/start
+fi
+

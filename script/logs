@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# script/tail_all_logs: Tails the logs of all containers that make up the service
+# Pass in a container name for only those logs
+
+set -e
+
+if [ -n "$1" ]; then
+  docker-compose --profile="*" logs -f --tail 100 "$1"
+else
+  docker-compose --profile="*" logs -f --tail 100
+fi

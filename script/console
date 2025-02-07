@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# script/console: Get a console inside the docker container
+
+set -e
+
+if [ -n "$1" ]; then
+  docker compose run --rm "$1" /bin/bash
+else
+  docker compose run --rm app /bin/bash
+fi

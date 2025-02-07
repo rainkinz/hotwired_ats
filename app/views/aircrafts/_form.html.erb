@@ -1,0 +1,52 @@
+<%= form_with(model: aircraft, class: "flex") do |form| %>
+  <% if aircraft.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(aircraft.errors.count, "error") %> prohibited this aircraft from being saved:</h2>
+
+      <ul>
+        <% aircraft.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :registration, style: "display: block" %>
+    <%= form.text_field :registration %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :model, style: "display: block" %>
+    <%= form.text_field :model %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :category, style: "display: block" %>
+    <%= form.text_field :category %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :complex, style: "display: block" %>
+    <%= form.check_box :complex %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :taa, style: "display: block" %>
+    <%= form.check_box :taa %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :high_performance, style: "display: block" %>
+    <%= form.check_box :high_performance %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :pressurized, style: "display: block" %>
+    <%= form.check_box :pressurized %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
