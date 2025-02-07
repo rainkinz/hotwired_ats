@@ -1,5 +1,6 @@
 # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
+  resources :quizzes
 
   authenticated :user do
     root to: 'dashboard#show', as: :user_root

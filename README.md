@@ -20,3 +20,7 @@ This is just my version of the code written in the excellent tutorial found here
 * Get it running using:
 
   `script/restart`
+
+* Get a console using:
+
+  `script/console`
