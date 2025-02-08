@@ -7,6 +7,6 @@ export default defineConfig({
   plugins: [
     RubyPlugin(),
     tailwindcss(),
-    FullReload(['config/routes.rb', 'app/views/**/*'])
+    FullReload(['config/routes.rb', 'config/initializers/simple_form.rb', 'app/views/**/*'])
   ],
 })

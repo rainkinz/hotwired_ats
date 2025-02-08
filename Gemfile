@@ -37,7 +37,6 @@ gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
-gem "devise"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -55,8 +54,10 @@ group :development do
   # gem "spring"
 end
 
+gem "simple_form", "~> 5.2"
 gem "stimulus_reflex", "~> 3.5.3"
 gem "vite_rails", "~> 3.0"
+gem "devise", "~> 4.9"
 
 # StimulusReflex recommends using Redis for session storage
 # gem "redis-session-store", "0.11.5"

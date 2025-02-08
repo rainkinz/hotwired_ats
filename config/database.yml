@@ -46,7 +46,6 @@ default: &default
   # Defaults to warning.
   #min_messages: notice
 
-
 development:
   <<: *default
   database: hotwired_ats_development
