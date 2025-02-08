@@ -1,6 +1,6 @@
 # Hotwired ATS
 
-This is just my version of the code written in the excellent tutorial found here: https://book.hotwiringrails.com
+This is just my version of the code written in the excellent tutorial [Hotwiring Rails](https://book.hotwiringrails.com)
 
 ## Differences
 
@@ -24,3 +24,9 @@ This is just my version of the code written in the excellent tutorial found here
 * Get a console using:
 
   `script/console`
+
+## References
+
+* [Stimulus Controller Docs](https://stimulus.hotwired.dev/reference/controllers)
+* [Stimulus Components](https://www.stimulus-components.com)
+* Nice write up of building a quiz app with Rails https://svrourke.medium.com/building-a-quiz-app-with-ruby-on-rails-896a22615b3
